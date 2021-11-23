@@ -1,0 +1,21 @@
+{
+  "name": "ua-redirect",
+  "version": "1.0.0",
+  "description": "Demo node application redirecting the user (301 and 302) to another route and printing out the user-agent string on each page.",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kevinfarrugia/ua-redirect.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kevinfarrugia/ua-redirect/issues"
+  },
+  "homepage": "https://github.com/kevinfarrugia/ua-redirect#readme"
+}
