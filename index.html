@@ -1,0 +1,26 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <h1>server-timing-redirect</h1>
+    <ul>
+      <li>Go to <a href="/302">302 redirect</a></li>
+      <li>Go to <a href="/301">301 redirect</a></li>
+    </ul>
+  </body>
+  <script>
+    const [navigationTiming] = performance.getEntriesByType("navigation");
+    if (navigationTiming) {
+      navigationTiming.serverTiming?.forEach((serverTiming) => {
+        if (serverTiming.duration) {
+          performance.mark(serverTiming.name, {
+            startTime: serverTiming.duration,
+            detail: serverTiming.description,
+          });
+        }
+      });
+    }
+  </script>
+</html>

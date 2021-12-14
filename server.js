@@ -1,20 +1,5 @@
 import { createServer } from "http";
-
-const HTML = `
-  <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  </head>
-  <body>
-    <h1>ua-redirect</h1>
-    <ul>
-      <li>Go to <a href='/302'>302 redirect</a></li>
-      <li>Go to <a href='/301'>301 redirect</a></li>
-    </ul>
-  </body>
-  </html>
-`;
+import fs from "fs";
 
 const server = createServer((request, response) => {
   request.on("error", (err) => {
@@ -46,6 +31,7 @@ const server = createServer((request, response) => {
     case "/301": {
       response.writeHead(301, {
         location: "/",
+        "server-timing": ["C; dur=100"],
       });
       response.end();
       break;
@@ -53,13 +39,23 @@ const server = createServer((request, response) => {
     case "/302": {
       response.writeHead(302, {
         location: "/",
+        "server-timing": ["C; dur=100"],
       });
       response.end();
       break;
     }
     default: {
-      response.writeHead(200);
-      response.end(HTML);
+      fs.readFile("./index.html", "utf8", (err, data) => {
+        if (err) {
+          response.writeHead(500);
+          response.end(err);
+          return;
+        }
+        response.writeHead(200, {
+          "server-timing": ["A; dur=20", "B; dur=200"],
+        });
+        response.end(data);
+      });
       break;
     }
   }
