@@ -39,7 +39,7 @@ const server = createServer((request, response) => {
     case "/302": {
       response.writeHead(302, {
         location: "/",
-        "server-timing": ["C; dur=100"],
+        "server-timing": ["D; dur=100"],
       });
       response.end();
       break;
@@ -52,7 +52,7 @@ const server = createServer((request, response) => {
           return;
         }
         response.writeHead(200, {
-          "server-timing": ["A; dur=20", "B; dur=200"],
+          "server-timing": ["A; dur=100"],
         });
         response.end(data);
       });
