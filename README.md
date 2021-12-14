@@ -1,6 +1,6 @@
 # server-timing-redirect
 
-Demo node application redirecting the user (301 and 302) to another route and printing out the user-agent string on each page.
+Demo node application redirecting the user (301 and 302) to another route to test server-timing response headers and print out the user-agent string on each page.
 
 ## License and Copyright
 
