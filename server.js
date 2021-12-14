@@ -51,9 +51,7 @@ const server = createServer((request, response) => {
           response.end(err);
           return;
         }
-        response.writeHead(200, {
-          "server-timing": ["A; dur=100"],
-        });
+        response.writeHead(200);
         response.end(data);
       });
       break;
