@@ -1,6 +1,12 @@
 import { createServer } from "http";
 import fs from "fs";
 
+const port = process.argv[2];
+
+if (!port) { 
+  console.error("You are required to pass a port number as an argument.");
+}
+
 const server = createServer((request, response) => {
   request.on("error", (err) => {
     console.error(err);
@@ -30,16 +36,18 @@ const server = createServer((request, response) => {
   switch (request.url) {
     case "/301": {
       response.writeHead(301, {
-        location: "/",
+        location: "http://localhost:3000/",
         "server-timing": ["C; dur=100"],
+        "Timing-Allow-Origin": "*",
       });
       response.end();
       break;
     }
     case "/302": {
       response.writeHead(302, {
-        location: "/",
+        location: "http://localhost:3000/",
         "server-timing": ["D; dur=100"],
+        "Timing-Allow-Origin": "*",
       });
       response.end();
       break;
@@ -51,7 +59,9 @@ const server = createServer((request, response) => {
           response.end(err);
           return;
         }
-        response.writeHead(200);
+        response.writeHead(200, {
+          "Timing-Allow-Origin": "*",
+        });
         response.end(data);
       });
       break;
@@ -59,6 +69,6 @@ const server = createServer((request, response) => {
   }
 });
 
-server.listen(3000);
+server.listen(port);
 
-console.log("Server started on http://localhost:3000");
+console.log(`Server listening on http://localhost:${port}`);
