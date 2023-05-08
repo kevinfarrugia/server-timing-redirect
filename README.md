@@ -6,12 +6,12 @@ Demo node application redirecting the user (301 and 302) to another route to tes
 
 **Same-origin**
 ```
-$ node server.js -- 3000 http://localhost:3000
+$ node server.js 3000 http://localhost:3000
 ```
 
 **Cross-origin**
 ```
-$ node server.js -- 3001 http://localhost:3000
+$ node server.js 3001 http://localhost:3000
 ```
 
 Navigate to `localhost:3000` (or the port you specified) and click the 301 and 302 links to test the redirection.
