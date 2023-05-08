@@ -2,9 +2,11 @@ import { createServer } from "http";
 import fs from "fs";
 
 const port = process.argv[2];
+const target = process.argv[3];
 
-if (!port) { 
-  console.error("You are required to pass a port number as an argument.");
+if (!(port && target)) { 
+  console.error("You are required to pass a port number and target as arguments. Example: npm start -- 3001 http://localhost:3000");
+  process.exit(1);
 }
 
 const server = createServer((request, response) => {
@@ -36,7 +38,7 @@ const server = createServer((request, response) => {
   switch (request.url) {
     case "/301": {
       response.writeHead(301, {
-        location: "http://localhost:3000/",
+        location: target,
         "server-timing": ["C; dur=100"],
         "Timing-Allow-Origin": "*",
       });
@@ -45,7 +47,7 @@ const server = createServer((request, response) => {
     }
     case "/302": {
       response.writeHead(302, {
-        location: "http://localhost:3000/",
+        location: target,
         "server-timing": ["D; dur=100"],
         "Timing-Allow-Origin": "*",
       });
@@ -71,4 +73,4 @@ const server = createServer((request, response) => {
 
 server.listen(port);
 
-console.log(`Server listening on http://localhost:${port}`);
+console.log(`Server listening on http://localhost:${port}. Redirecting to ${target}.`);
