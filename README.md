@@ -30,7 +30,8 @@ entries.forEach((entry) => {
 
 **Notes:**
 
-- The `/301/` or `/302` responses include `Server-Timing` response headers. These are not forwarded to the final location.
+- The `/301/` or `/302` responses include `Server-Timing` response headers. These are not forwarded to the final location. Read more: https://github.com/w3c/resource-timing/issues/21
+- The redirect time can be inferred using `performance.timing.navigationStart`. Read more: https://github.com/w3c/navigation-timing/issues/160
 
 ## License and Copyright
 
